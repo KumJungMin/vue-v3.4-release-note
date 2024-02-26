@@ -1,5 +1,10 @@
 <script setup>
+import { computed, ref } from 'vue';
 import Child from "./Child.vue";
+
+const num = ref(11);
+
+const isInvalid = computed(() => num.value > 10);
 </script>
 
 <template>
@@ -20,21 +25,14 @@ import Child from "./Child.vue";
   <hr />
   <br />
 
-  <h4>Case1. value가 범위 안일 때</h4>
-  <Child :max-range="10" :min-range="0" :value="0" />
+  <h4>value가 범위 내인지에 따라 warning 발생</h4>
+  <input type="number" v-model="num" />
+  <Child :max-range="10" :min-range="0" :value="num" />
   <pre>
     <code>{{``}}</code>
-    <code>{{ `<Child :max-range="10" :min-range="0" :value="0" />` }}</code>
+    <code>{{ `<Child :max-range="10" :min-range="0" ` }}<span :class="isInvalid && 'error'">{{ `:value="${num}"` }}</span>{{ ` />` }}</code>
   </pre>
-
-  <br />
-  <h4>Case2. value가 범위 밖일 때, props warning 발생</h4>
-  <Child :max-range="10" :min-range="0" :value="11" />
-  <pre>
-    <code>{{``}}</code>
-    <code>{{ `<Child :max-range="10" :min-range="0" ` }}<span class="error">{{ `:value="11"` }}</span>{{ ` />` }}</code>
-  </pre>
-  <div class="warning">
+  <div v-if="isInvalid" class="warning">
     [Vue warn]: Invalid prop: custom validator check failed for prop "value".
   </div>
 </template>
