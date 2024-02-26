@@ -6,11 +6,11 @@ const routes = [
     name: "BindShorthand",
     component: () => import("./examples/BindShorthand.vue"),
   },
-  // {
-  //   path: "/test",
-  //   name: "Test",
-  //   component: () => import("./views/Test.vue"),
-  // },
+  {
+    path: "/props",
+    name: "AllProps",
+    component: () => import("./examples/props/AllProps.vue"),
+  },
 ];
 
 const router = createRouter({
