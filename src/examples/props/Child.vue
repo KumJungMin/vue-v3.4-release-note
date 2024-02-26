@@ -11,7 +11,5 @@ const props = defineProps({
 </script>
 
 <template>
-  <div>
-    {{ value }}
-  </div>
+  <div></div>
 </template>
